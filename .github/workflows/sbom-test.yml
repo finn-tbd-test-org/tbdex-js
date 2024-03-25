@@ -8,6 +8,22 @@ jobs:
   sbom:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout source
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
+        with:
+          submodules: "true"
+
+      
+      # https://cashapp.github.io/hermit/usage/ci/
+      - name: Init Hermit
+        uses: cashapp/activate-hermit@v1
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build all workspace packages
+        run: pnpm build
+
       - name: Generate SBOM files
         run: |
           set -x
@@ -18,8 +34,8 @@ jobs:
           fossa analyze
 
           # generate SBOM
-          fossa report --format spdx attribution > tbdex-js.spdx
-          fossa report --format cyclonedx-json attribution > tbdex-js.cydx.json
+          fossa report --format spdx attribution | tee tbdex-js.spdx
+          fossa report --format cyclonedx-json attribution | tee tbdex-js.cydx.json
         env:
           FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
 
