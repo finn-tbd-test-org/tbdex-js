@@ -19,7 +19,7 @@ jobs:
 
           # generate SBOM
           fossa report --format spdx attribution > tbdex-js.spdx
-          # fossa report --format cydx attribution > tbdex-js.cydx
+          fossa report --format cyclonedx-json attribution > tbdex-js.cydx.json
         env:
           FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
 
@@ -27,4 +27,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: sbom
-          path: tbdex-js.spdx
+          path: |
+            tbdex-js.spdx
+            tbdex-js.cydx.json
