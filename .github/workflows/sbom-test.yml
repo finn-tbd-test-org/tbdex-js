@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Generate SBOM files
         run: |
+          set -x
+
           # install fossa cli
           curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
 
@@ -17,7 +19,7 @@ jobs:
 
           # generate SBOM
           fossa report --format spdx attribution > tbdex-js.spdx
-          fossa report --format cydx attribution > tbdex-js.cydx
+          # fossa report --format cydx attribution > tbdex-js.cydx
         env:
           FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
 
@@ -25,6 +27,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: sbom
-          path: |
-            tbdex-js.spdx
-            tbdex-js.cydx
+          path: tbdex-js.spdx
