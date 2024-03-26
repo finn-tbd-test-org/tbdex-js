@@ -13,7 +13,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   release:
     # prevents this action from running on forks
-    if: github.repository == 'TBD54566975/tbdex-js'
+    if: github.repository == 'finn-tbd-test-org/tbdex-js'
     permissions:
       contents: write # to create release (changesets/action)
       pull-requests: write # to create pull request (changesets/action)
