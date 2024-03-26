@@ -94,8 +94,8 @@ jobs:
             tbdex-js.spdx
             tbdex-js.cydx
 
-  publish-docs:
-    needs: release
-    name: Publish Docs
-    if: ${{ needs.release.outputs.published == 'true' }}
-    uses: ./.github/workflows/docs-publish.yml
+  # publish-docs:
+  #   needs: release
+  #   name: Publish Docs
+  #   if: ${{ needs.release.outputs.published == 'true' }}
+  #   uses: ./.github/workflows/docs-publish.yml
