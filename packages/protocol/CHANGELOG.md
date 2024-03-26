@@ -1,5 +1,11 @@
 # @tbdex/protocol
 
+## 0.28.0
+
+### Minor Changes
+
+- Do literally nothing (this is a test to force a release)
+
 ## 0.27.0
 
 ### Minor Changes
