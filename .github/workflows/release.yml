@@ -47,14 +47,13 @@ jobs:
         with:
           publish: echo pnpm changeset publish
           version: echo pnpm changeset version
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish `next` preview
         if: steps.changesets.outputs.published != 'true' && steps.changesets.outputs.pullRequestNumber != '' && steps.changesets.outputs.hasChangesets == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           git checkout main
           SHORT_SHA=$(git rev-parse --short HEAD)
